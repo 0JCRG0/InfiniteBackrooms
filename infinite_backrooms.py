@@ -5,6 +5,12 @@ from datetime import datetime
 import sys
 import termios
 import tty
+import os
+from dotenv import load_dotenv
+
+load_dotenv(".env")
+
+API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 
 def escape_chars(text):
     return re.sub(r'\\n', '\n', text)
@@ -24,7 +30,7 @@ def read_single_keypress():
     return key
     
     
-anthropic_client = anthropic.Anthropic(api_key="•••••••••••••••••••••••••••••••")
+anthropic_client = anthropic.Anthropic(api_key=API_KEY)
 
 def converse_with_claude(conversation_1, conversation_2, num_exchanges=5, supervised_mode=True):
     """
